@@ -1,6 +1,6 @@
-# BOOKSSTORE
+# BOOKSSTORE - an Angular 4.^ and Angular CLI project, including authentication, authorization, NGRX store, lazy loading and much more
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Development server
 

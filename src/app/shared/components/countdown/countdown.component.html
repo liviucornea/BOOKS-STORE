@@ -1,0 +1,6 @@
+<span [ngSwitch]="isAuctionEnded">
+  <span *ngSwitchCase="true">{{'layout.auctionEnded' | translate}}</span>
+  <span *ngSwitchCase="false">{{auctionEndTime}}</span>
+  <span *ngSwitchDefault>--</span>
+</span>
+

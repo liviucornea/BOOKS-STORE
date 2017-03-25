@@ -1,0 +1,56 @@
+{
+  "books": [
+    {
+      "bookId": "100A",
+      "model" : "drama",
+      "make" : "Amazon Books",
+      "year" : 2011,
+      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "color": "red",
+      "dealer": {
+        "dealerName": "BooksStore"
+      },
+      "highestBid": 4000,
+      "bidEnds" : "2017-03-28"
+    },
+    {
+      "bookId": "100B",
+      "model" : "drama",
+      "make" : "Amazon Books",
+      "year" : 2011,
+      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "color": "red",
+      "dealer": {
+        "dealerName": "BooksStore"
+      },
+      "highestBid": 4000,
+      "bidEnds" : "2017-03-28"
+    },
+    {
+      "bookId": "100C",
+      "model" : "drama",
+      "make" : "Amazon Books",
+      "year" : 2011,
+      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "color": "red",
+      "dealer": {
+        "dealerName": "BooksStore"
+      },
+      "highestBid": 4000,
+      "bidEnds" : "2017-03-28"
+    },
+    {
+      "bookId": "100D",
+      "model" : "drama",
+      "make" : "Amazon Books",
+      "year" : 2011,
+      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "color": "red",
+      "dealer": {
+        "dealerName": "BooksStore"
+      },
+      "highestBid": 4000,
+      "bidEnds" : "2017-03-28"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+$padding: 10px;
+.card{
+    &__title{
+        background: #EEEEEE;
+        padding: $padding;
+    }
+    &__content{
+        padding: $padding;
+    }
+}
