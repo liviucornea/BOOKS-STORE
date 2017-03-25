@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "startWithProxy": "start http://localhost:4200 & ng serve -port 4200 -host 0.0.0.0 --proxy-config proxy.config.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,21 +13,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^2.4.0",
-    "@angular/compiler": "^2.4.0",
-    "@angular/core": "^2.4.0",
-    "@angular/forms": "^2.4.0",
-    "@angular/http": "^2.4.0",
-    "@angular/platform-browser": "^2.4.0",
-    "@angular/platform-browser-dynamic": "^2.4.0",
-    "@angular/router": "^3.4.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
-    "@ngrx/effects": "~2.0.0",
-    "@ngrx/router-store": "^1.1.0",
-    "@ngrx/store-devtools": "^3.2.3",
-    "@types/lodash": "^4.14.43",
-    "@types/mocha": "^2.2.39",
+    "@ngrx/store-devtools": "^3.2.4",
     "angular2-jwt": "^0.1.27",
     "auth0-lock": "^10.7.3",
     "bootstrap": "^4.0.0-alpha.6",
@@ -35,13 +32,12 @@
     "moment-duration-format": "~1.3.0",
     "ng2-bootstrap": "1.3.3",
     "ng2-translate": "^5.0.0",
-    "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.7.6"
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-rc.4",
-    "@angular/compiler-cli": "^2.4.0",
+    "@angular/cli": "1.0.0",
+    "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",
@@ -56,6 +52,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.0.0"
+    "typescript": "~2.2.0"
   }
 }

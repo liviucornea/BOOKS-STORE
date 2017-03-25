@@ -1,0 +1,16 @@
+// @import '~bootstrap';
+@import '~bootstrap/dist/css/bootstrap.min';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-grid';
+
+
+@import 'colors';
+@import 'util';
+@import 'button';
+
+.label{
+  font-size: .9rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 2px;
+}
