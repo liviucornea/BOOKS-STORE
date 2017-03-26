@@ -7,7 +7,7 @@ import {NotAuthorizedComponent} from './shared/components/not-authorized/not-aut
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-//  { path: 'watchlist', loadChildren: './watchlist/watchlist.module#WatchlistModule'},
+  { path: 'watchlist', loadChildren: './watchlist/watchlist.module#WatchlistModule'},
 /*  { path: 'checkout', loadChildren: './checkout/checkout.module#CheckoutModule',
     canActivate: [AuthorizationGuard],
   },

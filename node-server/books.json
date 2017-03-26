@@ -1,11 +1,12 @@
 {
   "books": [
     {
+      "title": "Angular 2 by Examples",
       "bookId": "100A",
       "model" : "drama",
       "make" : "Amazon Books",
       "year" : 2011,
-      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "thumbnailPath" : "assets/img/books/angular2ByExamples.jpg",
       "color": "red",
       "dealer": {
         "dealerName": "BooksStore"
@@ -14,11 +15,12 @@
       "bidEnds" : "2017-03-28"
     },
     {
+      "title": "Angular 2 Development",
       "bookId": "100B",
       "model" : "drama",
       "make" : "Amazon Books",
       "year" : 2011,
-      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "thumbnailPath" : "assets/img/books/Angular2Development.jpg",
       "color": "red",
       "dealer": {
         "dealerName": "BooksStore"
@@ -27,11 +29,12 @@
       "bidEnds" : "2017-03-28"
     },
     {
+      "title": "Angular 2 From TheoryToPractice",
       "bookId": "100C",
       "model" : "drama",
       "make" : "Amazon Books",
       "year" : 2011,
-      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "thumbnailPath" : "assets/img/books/Angular2FromTheoryToPractice.jpg",
       "color": "red",
       "dealer": {
         "dealerName": "BooksStore"
@@ -40,11 +43,12 @@
       "bidEnds" : "2017-03-28"
     },
     {
+      "title": "NG2 Book 2 ",
       "bookId": "100D",
       "model" : "drama",
       "make" : "Amazon Books",
       "year" : 2011,
-      "thumbnailPath" : "assets/img/cars/cartestImage.png",
+      "thumbnailPath" : "assets/img/cars/ng2-book2.jpg",
       "color": "red",
       "dealer": {
         "dealerName": "BooksStore"

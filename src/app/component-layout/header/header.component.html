@@ -21,11 +21,11 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/watchlist" [ngClass]="{'disabled': !authService.authenticated() }">Wish List</a>
+          <a class="nav-link" routerLink="/watchlist" [ngClass]="{'disabled': !authService.authenticated() }">Preferred Books</a>
         </li>
 
       </ul>
-      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" (click)="doLogIn()"
+      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" (click)="authService.login()"
               *ngIf="!authService.authenticated()">Log In
       </button>
       <button class="btn btn-sma btn-outline-success my-2 my-sm-0" (click)="authService.logout()"
