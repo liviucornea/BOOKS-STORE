@@ -13,8 +13,10 @@ import {Observable} from "rxjs";
 export class HeaderComponent implements OnInit {
   logoPath: String = `${environment['assetPath']}/img/angular.svg`;
   user$: Observable<any>;
+  auth$: Observable<any>;
   constructor(private authenticationService: AuthenticationService, private store: Store<AppState>) {
     this.user$ = store.select('user');
+    this.auth$ = store.select('authorization');
   }
 
   ngOnInit() {

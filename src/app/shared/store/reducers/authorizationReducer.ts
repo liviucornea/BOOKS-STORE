@@ -1,4 +1,5 @@
 import {Action} from '@ngrx/store';
+import {USER_AUTHORIZED} from '../actions/AuthorizedActions';
 export interface AuthorizationState {
   roleType: string;
 }
@@ -9,5 +10,12 @@ export const INITIAL_AUTH_STATE: AuthorizationState = {
 
 export const authorizationReducer = (
   (state: AuthorizationState = INITIAL_AUTH_STATE, action: Action) => {
-    return state;
+    switch (action.type) {
+      case USER_AUTHORIZED:
+        return {
+          roleType: action.payload
+        }
+      default:
+        return state;
+    }
   });

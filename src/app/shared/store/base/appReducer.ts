@@ -4,13 +4,13 @@ import {UserState, userReducer, INITIAL_USER_STATE} from '../reducers/userReduce
 
 
 export interface AppState {
-  auth: AuthorizationState;
+  authorization: AuthorizationState;
   user: UserState;
 };
 
 
 export const INITIAL_APPLICATION_STATE: AppState = {
-  auth: INITIAL_AUTH_STATE,
+  authorization: INITIAL_AUTH_STATE,
   user: INITIAL_USER_STATE
 }
 

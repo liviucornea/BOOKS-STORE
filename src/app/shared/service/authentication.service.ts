@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../store/base/appReducer';
 import {UserLoggedInAction} from '../store/actions/UserActions';
+import {UserAuthorizedAction} from "../store/actions/AuthorizedActions";
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -29,6 +30,7 @@ export class AuthenticationService {
       localStorage.setItem('id_token', authResult.idToken);
       // assuming you login with gith hub we use email like your user id
       this.store.dispatch(new UserLoggedInAction(authResult.idTokenPayload.email));
+      this.store.dispatch(new UserAuthorizedAction('ADMINISTRATOR'));
     });
   }
 
@@ -48,6 +50,7 @@ export class AuthenticationService {
     // Remove token from localStorage
    //  console.debug('logging out');
     localStorage.removeItem('id_token');
+    this.store.dispatch(new UserLoggedInAction('GUEST'));
     this.router.navigate(['']);
   }
 }
