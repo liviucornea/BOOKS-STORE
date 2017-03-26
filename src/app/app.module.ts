@@ -8,6 +8,9 @@ import { HeaderComponent } from './component-layout/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { appRouting, appRoutingProviders } from 'app/app.routs';
 import { SharedModule } from './shared/shared.module';
+import {StoreModule} from '@ngrx/store';
+import {appReducer} from './shared/store/base/appReducer';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import { SharedModule } from './shared/shared.module';
     HttpModule,
     JsonpModule,
     appRouting,
+    StoreModule.provideStore(appReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     SharedModule.forRoot()
   ],
   providers: [appRoutingProviders],

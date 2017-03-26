@@ -6,11 +6,11 @@ export interface Book {
   year: number;
   thumbnailPath: string;
   color: string;
-  editure: Editure;
+  editor: Editor;
   highestBid: number;
   bidEnds: Date;
 }
 
-export interface Editure {
-  'editureName': string;
+export interface Editor {
+  'editorName': string;
 }

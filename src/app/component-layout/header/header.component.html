@@ -14,22 +14,27 @@
           <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" [ngClass]="{'disabled': !authService.authenticated() }">Search</a>
+          <a class="nav-link" routerLink="/" [ngClass]="{'disabled': !authenticationService.authenticated() }">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/checkout/V0001" [ngClass]="{'disabled': !authService.authenticated() }">Checkout books</a>
+          <a class="nav-link" routerLink="/checkout/V0001" [ngClass]="{'disabled': !authenticationService.authenticated() }">Checkout books</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/watchlist" [ngClass]="{'disabled': !authService.authenticated() }">Preferred Books</a>
+          <a class="nav-link" routerLink="/watchlist" [ngClass]="{'disabled': !authenticationService.authenticated() }">Preferred Books</a>
         </li>
+
+<li class="nav-item">
+  <a class="nav-link" routerLink="/"> Your are logged in as :  {{(user$ | async)?.userId}} </a>
+</li>
+
 
       </ul>
-      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" (click)="authService.login()"
-              *ngIf="!authService.authenticated()">Log In
+      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" (click)="authenticationService.login()"
+              *ngIf="!authenticationService.authenticated()">Log In
       </button>
-      <button class="btn btn-sma btn-outline-success my-2 my-sm-0" (click)="authService.logout()"
-              *ngIf="authService.authenticated()">Log Out
+      <button class="btn btn-sma btn-outline-success my-2 my-sm-0" (click)="authenticationService.logout()"
+              *ngIf="authenticationService.authenticated()">Log Out
       </button>
     </div>
   </nav>

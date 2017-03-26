@@ -3,6 +3,9 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../store/base/appReducer';
+import {UserLoggedInAction} from '../store/actions/UserActions';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
@@ -19,11 +22,13 @@ export class AuthenticationService {
       }
     });
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store<AppState>) {
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult) => {
       // console.info('saving authentication token', authResult);
       localStorage.setItem('id_token', authResult.idToken);
+      // assuming you login with gith hub we use email like your user id
+      this.store.dispatch(new UserLoggedInAction(authResult.idTokenPayload.email));
     });
   }
 
