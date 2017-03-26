@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, JsonpModule} from '@angular/http';
 import {SharedModule} from '../shared/shared.module';
 import {watchlistRouting} from './watchlist.routes';
+import {BooksService} from './shared/services/books.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,9 @@ import {watchlistRouting} from './watchlist.routes';
     JsonpModule,
     watchlistRouting,
     SharedModule
+  ],
+  providers: [
+    BooksService
   ]
 })
 export class WatchlistModule {

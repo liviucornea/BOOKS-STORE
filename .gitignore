@@ -37,6 +37,13 @@ testem.log
 /e2e/*.js
 /e2e/*.map
 
+#canned-server
+/canned-server/node_modules
+
+#node-server
+/node-server/node_modules
+
+
 # System Files
 .DS_Store
 Thumbs.db
