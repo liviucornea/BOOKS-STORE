@@ -12,6 +12,7 @@ import {StoreModule} from '@ngrx/store';
 import {appReducer} from './shared/store/base/appReducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 
+
 @NgModule({
   declarations: [
     AppComponent,

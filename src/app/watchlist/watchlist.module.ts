@@ -8,6 +8,11 @@ import {HttpModule, JsonpModule} from '@angular/http';
 import {SharedModule} from '../shared/shared.module';
 import {watchlistRouting} from './watchlist.routes';
 import {BooksService} from './shared/services/books.service';
+import {BooksEffects} from './store/effects/BooksEffects';
+import {EffectsModule} from '@ngrx/effects';
+
+
+
 
 @NgModule({
   declarations: [
@@ -21,6 +26,7 @@ import {BooksService} from './shared/services/books.service';
     HttpModule,
     JsonpModule,
     watchlistRouting,
+    EffectsModule.run(BooksEffects),
     SharedModule
   ],
   providers: [
