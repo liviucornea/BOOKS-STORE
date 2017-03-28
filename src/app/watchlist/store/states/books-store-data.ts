@@ -7,6 +7,5 @@ export interface BooksStoreData {
 }
 
 export const BOOKS_INITIAL_STORE_DATA: BooksStoreData = {
-
   books: {}
 };

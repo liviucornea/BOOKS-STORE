@@ -1,4 +1,44 @@
-<p>
-  book-list-ui works!
-  Book details will be here!!!!
-</p>
+<div id="watchListUi" class="container-fluid">
+  <div class="row listItem" *ngFor="let book of books">
+    <div class="col-xm-2 col-sm-2 col-lg-2">
+      <!-- <img class="photo-icon carlistImg" src="{{book.data.srcIMG }}">-->
+      <div class="wrapper">
+        <div class="box">
+          <img class="photo-icon" src="{{book.data.thumbnailPath}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-xm-8 col-sm-8 col-lg-8" style="float: left">
+      <div class="row align-items-start">
+        <div class="col" style="float: left">
+          <div><span class="text-adesa font-weight-bold">Book information:</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div><span class="label">Domain:</span> <span class="text-adesa font-weight-bold">{{book.data.domain}}</span>
+            <span class="label">Make:</span> <span class="text-adesa font-weight-bold">{{book.data.make}}</span>
+            <span class="label">Year:</span> <span class="text-adesa font-weight-bold">{{book.data.year}}</span>
+
+          </div>
+          <div>
+            <span class="label">Color:</span> <span class="text-adesa font-weight-bold">{{book.data.color}}</span>
+          </div>
+        </div>
+        <div class="col">
+          <span class="text-adesa font-weight-bold">Editure Info:</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xm-2 col-sm-2 col-lg-2" style="float: right; display: block">
+      <button type="button" class="btn btn-success btn-sm">Buy now: {{book.data.highestBid + 500 | currency}}</button>
+      <hr>
+      <button (click)="0" type="button" class="btn btn-success btn-sm">
+        Check out
+      </button>
+    </div>
+
+  </div>
+
+</div>

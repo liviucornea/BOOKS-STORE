@@ -3,7 +3,7 @@
     {
       "title": "Angular 2 by Examples",
       "bookId": "100A",
-      "model" : "drama",
+      "domain" : "IT - Angular",
       "make" : "Amazon Books",
       "year" : 2011,
       "thumbnailPath" : "assets/img/books/angular2ByExamples.jpg",
@@ -17,7 +17,7 @@
     {
       "title": "Angular 2 Development",
       "bookId": "100B",
-      "model" : "drama",
+      "domain" : "IT - Angular",
       "make" : "Amazon Books",
       "year" : 2011,
       "thumbnailPath" : "assets/img/books/Angular2Development.jpg",
@@ -31,7 +31,7 @@
     {
       "title": "Angular 2 From TheoryToPractice",
       "bookId": "100C",
-      "model" : "drama",
+      "domain" : "IT - Angular",
       "make" : "Amazon Books",
       "year" : 2011,
       "thumbnailPath" : "assets/img/books/Angular2FromTheoryToPractice.jpg",
@@ -45,10 +45,10 @@
     {
       "title": "NG2 Book 2 ",
       "bookId": "100D",
-      "model" : "drama",
+      "domain" : "IT - Angular",
       "make" : "Amazon Books",
       "year" : 2011,
-      "thumbnailPath" : "assets/img/cars/ng2-book2.jpg",
+      "thumbnailPath" : "assets/img/books/ng2-book2.jpg",
       "color": "red",
       "editure": {
         "editureName": "BooksStore"

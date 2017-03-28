@@ -1,10 +1,10 @@
-import {BooksStoreData} from '../states/books-store-data';
+import {BOOKS_INITIAL_STORE_DATA, BooksStoreData} from '../states/books-store-data';
 import {Action, ActionReducer} from '@ngrx/store';
 import {BOOKS_LOADED_ACTION, BooksLoadedAction} from '../actions/BooksLoadedAction';
 import * as _ from 'lodash';
 
 
-export const booklistStoreData: ActionReducer<BooksStoreData> = (state: BooksStoreData, action: Action) => {
+export const booklistStoreData: ActionReducer<BooksStoreData> = (state: BooksStoreData = BOOKS_INITIAL_STORE_DATA, action: Action) => {
   switch (action.type) {
 
     case BOOKS_LOADED_ACTION:

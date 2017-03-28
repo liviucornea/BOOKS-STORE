@@ -1,7 +1,7 @@
 export interface Book {
   title: string;
   bookId: string;
-  model: string;
+  domain: string;
   make: string;
   year: number;
   thumbnailPath: string;

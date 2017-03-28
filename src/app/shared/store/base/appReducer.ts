@@ -6,6 +6,7 @@ import {UserState, userReducer, INITIAL_USER_STATE} from '../reducers/userReduce
 export interface AppState {
   authorization: AuthorizationState;
   user: UserState;
+  booklistStoreData?: any;
 };
 
 

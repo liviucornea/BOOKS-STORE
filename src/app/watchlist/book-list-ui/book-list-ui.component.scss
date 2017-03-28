@@ -1,0 +1,40 @@
+@import '../../../styles/colors';
+
+.listItem {
+  border-bottom: solid 0.2px;
+  border-bottom-color: rgba(3, 3, 3, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+button {
+  background-color: $booksStore;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border: 2px black solid
+}
+
+.box {
+  float: left;
+}
+
+.box > img {
+  width: 100%;
+  height: 80%;
+}
+
