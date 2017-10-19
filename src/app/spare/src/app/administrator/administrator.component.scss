@@ -1,0 +1,27 @@
+@import '../../styles/app';
+
+#searchMain, #searchResult {
+  background-color: $baseBackground;
+}
+
+form {
+  background-color:  rgba(62, 255, 93, 0.16);
+}
+
+.alignRight {
+  text-align: right;
+}
+.userList {
+  margin: 0 auto;
+}
+
+button {
+  max-width: 200px;
+  max-height: 35px;
+  cursor: pointer;
+  cursor: hand;
+}
+select[disabled]{
+  cursor: not-allowed;
+}
+

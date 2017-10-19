@@ -1,0 +1,62 @@
+<div id="searchMain">
+  <div class="row">
+    <div class="col-sm-2 alignRight">
+      <label for="dataSource"><strong>Datasource:</strong></label>
+    </div>
+    <div class="col-sm-2" style="text-align: left">
+      <select id="dataSource" class="dataSource" #dS [(ngModel)]="dataSource" disabled>
+        <optgroup>
+        <option *ngFor="let dataSource of dataSources" value="{{dataSource.id}}">{{dataSource.description}}</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <label for="agentID" class="col-sm-2 col-form-label alignRight"><strong>Agent ID:</strong></label>
+    <div class="col-sm-10">
+      <input id="agentID" type="text" [(ngModel)]="agentIdsToSearch" (keyup)="interceptEnter($event)">
+    </div>
+  </div>
+  <div class="row">
+    <label for="agentFirstName" class="col-sm-2 col-form-label alignRight"><strong>First Name:</strong></label>
+    <div class="col-sm-10">
+      <input id="agentFirstName" type="text" [(ngModel)]="firstNamesToSearch" style="width:30%" (keyup)="interceptEnter($event)">
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="agentLastName" class="col-sm-2 col-form-label alignRight"><strong>Last Name:</strong></label>
+    <div class="col-sm-10">
+      <input id="agentLastName" type="text" [(ngModel)]="lastNamesToSearch" style="width:30%" (keyup)="interceptEnter($event)">
+    </div>
+  </div>
+  <hr>
+  <div class="d-flex flex-row">
+    <div class="p-1 d-flex justify-content-end" style="width: 20%">
+      <button type="button"  class="btn btn-primary btn-sm" (click)="doSearch(dS.value)">Search</button>
+    </div>
+    <div class="p-1 d-flex justify-content-center" style="width: 20%">
+      <button type="cancel" class="btn btn-default" (click)="doCancel()">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-start" style="width: 50%" *ngIf="agentsMassUpdatesList.length>1">
+      <button type="button" class="btn btn-primary btn-sm" (click)="toggleMassUpdates()">
+       <span *ngIf="!doingMassUpdates" > Show mass updates! </span>
+        <span *ngIf="doingMassUpdates" > Hide mass updates! </span>
+      </button>
+    </div>
+
+  </div>
+  <hr>
+  <div *ngIf="doingMassUpdates" >
+    <app-agents-mass-update [skills]="allSkillsByUser" [agentsMassUpdatesList]="agentsMassUpdatesList"
+    (sendMassUpdateAction)="getMassUpdateAction($event)"></app-agents-mass-update>
+  </div>
+  <hr  *ngIf="doingMassUpdates">
+
+  <app-agent-list *ngIf="agentsList.length > 0" [agents]="agentsList" [allSkills]="allSkillsByUser"
+  (sendForMassUpdateList)="addToMassUpdate($event)"
+                  [agentsMassUpdatesList]="agentsMassUpdatesList"></app-agent-list>
+  <div *ngIf="searchPerformed && agentsList.length==0">
+    <span><cite>No results found for your search criteria!</cite></span>
+  </div>
+</div>

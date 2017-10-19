@@ -1,0 +1,76 @@
+<div id="searchMain">
+  <div class="row">
+    <div class="col-md-2 alignRight">
+      <label for="dataSource"><strong>Datasource:</strong></label>
+    </div>
+    <div class="col-md-10" style="text-align: left">
+
+      <select id="dataSource" class="dataSource" #dS [(ngModel)]="dataSource" disabled>
+        <optgroup>
+          <option *ngFor="let dataSource of dataSources" value="{{dataSource.id}}">{{dataSource.description}}</option>
+        </optgroup>
+      </select>
+
+    </div>
+  </div>
+  <!--div class="row">
+    <div class="col-md-2 alignRight">
+       <label for="cmsLoginID" class="col-form-label"><strong>Skill Synk ID:</strong></label>
+    </div>
+    <div class="col-md-10">
+      <input id="cmsLoginID" type="text" [(ngModel)]="skillSynkIdsToSearch">
+    </div>
+  </div-->
+  <div class="row">
+    <div class="col-md-2 alignRight">
+      <label for="userFirstName" class="col-form-label alignRight"><strong>First Name:</strong></label>
+    </div>
+    <div class="col-md-10">
+      <input id="userFirstName" type="text" [(ngModel)]="firstNamesToSearch" style="width:30%" (keyup)="interceptEnter($event)">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 alignRight">
+      <label for="userLastName" class="col-form-label alignRight"><strong>Last Name:</strong></label>
+    </div>
+    <div class="col-md-10">
+      <input id="userLastName" type="text" [(ngModel)]="lastNamesToSearch" style="width:30%" (keyup)="interceptEnter($event)">
+    </div>
+  </div>
+
+  <hr>
+  <div class="d-flex flex-row">
+    <div class="p-1 d-flex justify-content-end" style="width: 20%">
+      <button type="submit" class="btn btn-sm btn-primary" (click)="doSearch(dS.value)">Search</button>
+    </div>
+    <div class="p-1 d-flex justify-content-center" style="width: 20%">
+      <button type="cancel" class="btn btn-sm btn-default" (click)="doCancel()">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-start" style="width: 60%" *ngIf="usersMassUpdatesList.length>1">
+      <button type="button" class="btn btn-primary btn-sm" (click)="toggleMassUpdates()">
+        <span *ngIf="!doingMassUpdates" > Show mass updates! </span>
+        <span *ngIf="doingMassUpdates" > Hide mass updates! </span>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="doingMassUpdates" >
+    <app-users-mass-update  [adminSkills]="allSkills" [usersMassUpdatesList]="usersMassUpdatesList"
+    (sendMassUpdateAction)="getMassUpdateAction($event)">
+    </app-users-mass-update>
+  </div>
+  <hr  *ngIf="doingMassUpdates">
+
+  <div class="row">
+    <div class="col-md-12 userList">
+      <app-users-list *ngIf="usersList.length > 0" [users]="usersList" [allSkills]="allSkills"
+                      [usersMassUpdatesList]="usersMassUpdatesList"
+                      (sendForMassUpdateList)="addToMassUpdate($event)"></app-users-list>
+    </div>
+  </div>
+
+  <div *ngIf="searchPerformed && usersList.length==0">
+    <span><cite>No results found for your search criteria!</cite></span>
+  </div>
+
+</div>

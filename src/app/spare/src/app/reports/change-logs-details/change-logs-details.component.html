@@ -1,0 +1,76 @@
+<div id="agentDetails">
+  <div class="d-flex flex-row">
+    <div class="p-1" style="width: 50%"><span><strong>Agent id: {{agent.cmsLoginId}} </strong> </span>
+    </div>
+    <div class="p-1" style="width: 50%">
+      <span><strong>Agent Name: {{agent.firstName + ' ' + agent.lastName}} </strong> </span>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-1" style="width: 50%"><span><strong>Date time: </strong> {{agent.changedDate}}</span>
+    </div>
+    <div class="p-1" style="width: 50%"><span><strong>Changed by: </strong> {{changedBy}}</span>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-1" style="width: 50%">
+      <div class="beforeAfter"><span><strong>Before:</strong> </span>
+      </div>
+    </div>
+    <div class="p-1" style="width: 50%">
+      <div class="beforeAfter">
+      <span><strong>After:</strong></span>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <!-- skills before -->
+    <div class="p-1" style="width: 50%">
+      <div class="d-flex flex-row headers">
+        <div class="p-1" style="width: 80%"><span><strong>Skill</strong> </span>
+        </div>
+        <div class="p-1" style="width: 20%"><span><strong>Level</strong></span>
+        </div>
+      </div>
+      <div *ngFor="let skill of agent.skills; let odd=odd; let even=even"
+           [ngClass]="{ odd: odd, even: even, gridRow: true }">
+        <div class="d-flex flex-row" [ngClass]="{deleted: skill?.reportStatus === 'deleted',
+          changed: skill?.reportStatus === 'changed',
+          added: skill?.reportStatus === 'added'}" *ngIf="skill?.reportStatus != 'added'">
+          <div class="p-1" style="width: 80%"><span><strong>{{skill.code + ' '+ skill.description}}</strong> </span>
+          </div>
+          <div class="p-1" style="width: 20%"><span><strong>{{skill?.fromLevel}}</strong></span>
+            <i  *ngIf="skill?.reportStatus === 'deleted'"  class="fa fa-minus-circle" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-1" style="width: 50%">
+      <div class="d-flex flex-row headers">
+        <div class="p-1" style="width: 60%"><span><strong>Skill</strong> </span>
+        </div>
+        <div class="p-1" style="width: 20%"><span><strong>Level</strong></span>
+        </div>
+        <div class="p-1" style="width: 20%">
+        </div>
+      </div>
+      <div *ngFor="let skill of agent.skills; let odd=odd; let even=even"
+           [ngClass]="{ odd: odd, even: even, gridRow: true }">
+        <div class="d-flex flex-row" [ngClass]="{changed: skill?.reportStatus === 'changed',
+          added: skill?.reportStatus === 'added'}" *ngIf="skill?.reportStatus != 'deleted'">
+          <div class="p-1" style="width: 60%"><span><strong>{{skill.code + ' - '+ skill.description}}</strong> </span>
+          </div>
+          <div class="p-1" style="width: 20%"><span><strong>{{skill?.toLevel}}</strong></span>
+          </div>
+          <div class="p-1" style="width: 20%">{{skill?.reportStatus}}
+            <!--i *ngIf="skill?.reportStatus === 'added'" class="fa fa-plus-circle" aria-hidden="true" title="Added"></i>
+            <i *ngIf="skill?.reportStatus === 'kept'" class="fa fa-square" aria-hidden="true" title="Kept"></i>
+            <i *ngIf="skill?.reportStatus === 'changed'" class="fa fa-adjust" aria-hidden="true" title="Changed"></i-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

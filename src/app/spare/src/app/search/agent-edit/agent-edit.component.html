@@ -1,0 +1,70 @@
+<div id="main">
+  <div class="row">
+    <div class="col-md-3">
+      <span><strong>Skill #</strong></span>
+    </div>
+    <div class="col-md-4">
+      <span><strong>Skill Name</strong></span>
+    </div>
+    <div class="col-md-3">
+      <span><strong>Level</strong></span>
+    </div>
+    <div class="col-md-2">
+      <span><strong>Assigned ?</strong></span>
+    </div>
+  </div>
+  <hr style="align-self: center">
+  <div class="row" *ngFor="let skill of agent?.skills">
+    <div class="col-md-3">
+      <span [ngClass]="{'nonEditSkill': skill.nonEditable }">{{skill.code}}</span>
+    </div>
+    <div class="col-md-4">
+      <span [ngClass]="{'nonEditSkill': skill.nonEditable }">{{skill.description}}</span>
+    </div>
+    <div class="col-md-3">
+
+      <select [(ngModel)]="skill.level" [disabled]="skill.nonEditable">
+        <option *ngFor="let level of skill.levels" value="{{level}}">{{level}}</option>
+      </select>
+
+
+    </div>
+    <div class="col-md-2">
+      <input [(ngModel)]="skill.isSelected" type="checkbox" [disabled]="skill.nonEditable"
+             (click)="unassignSkill(skill)"/>
+    </div>
+  </div>
+  <hr style="align-self: center">
+  <button (click)="addingNewSkills()" [disabled]="!agentInfoLoaded || unassignedToAgentSkills.length ==0">Add new skills!
+  </button> &nbsp;
+  <button (click)="applySkillsChanges()" [disabled]="!agentInfoLoaded">Apply changes</button>
+  <button (click)="doCancel()" [disabled]="!agentInfoLoaded">Cancel</button>
+  <hr>
+  <div *ngIf="isAddingNewSkills">
+    <div *ngIf="unassignedToAgentSkills.length>0">
+      <span> Skills available to choose from</span>
+      <div class="row" *ngFor="let skill of unassignedToAgentSkills">
+        <div class="col-md-3">
+          <span>{{skill.code}}</span>
+        </div>
+        <div class="col-md-4">
+          <span>{{skill.description}}</span>
+        </div>
+        <div class="col-md-3">
+          <select [(ngModel)]="skill.level">
+            <option *ngFor="let level of skill.levels" value="{{level}}">{{level}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input [(ngModel)]="skill.isSelected" type="checkbox" (click)="assignSkill(skill)"/>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="agentInfoLoaded && unassignedToAgentSkills?.length===0">
+    <span><i>{{noMoreSkills}}</i></span>
+  </div>
+
+</div>
+

@@ -1,0 +1,19 @@
+@import '../../../../styles/app';
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.mainMenu{
+  background-color: $menuBackground;
+}
+.active-link {
+  color: darkblue !important;
+}
+.unSelectedItem {
+  color: black !important;
+}
+button {
+  cursor: pointer;
+  cursor: hand;
+}
+

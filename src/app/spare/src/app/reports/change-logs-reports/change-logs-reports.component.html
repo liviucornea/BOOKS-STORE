@@ -1,0 +1,81 @@
+<div id="main">
+  <hr>
+  <div class="agentInfoTabs d-flex flex-row">
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      <a class="flex-sm-fill text-sm-center nav-link" style="margin-right: 2px !important;"
+         [ngClass]="{'activeBtn': whatToShow === 'summary' }" (click)="show('summary')">Summary</a>
+      <a class="flex-sm-fill text-sm-center nav-link" [ngClass]="{'activeBtn': whatToShow === 'details' }"
+         (click)="show('details')">Details</a>
+    </nav>
+    <div *ngIf="whatToShow === 'summary'"  class="d-flex justify-content-end align-bottom" style="width: 90%">
+      <i class="fa fa-file-excel-o fa-lg  added" aria-hidden="true" title="Export to excel"
+         (click)="exportSummaryToExcel(summaryListSkills)"></i>
+ </div>
+
+    <!--div class="d-flex justify-content-end align-bottom" style="width: 90%">
+      <i class="fa fa-adjust changed" aria-hidden="true" title="Changed">  Changed</i>
+      <i class="fa fa-plus-circle added" aria-hidden="true" title="Added">  Added</i>
+      <i class="fa fa-minus-circle deleted" aria-hidden="true">  Deleted</i>
+    </div-->
+
+
+  </div>
+  <div *ngIf="whatToShow === 'summary'" class="agentInfo">
+    <div class="d-flex flex-row">
+      <div class="p-1 alignRight" style="width: 10%"> <span><strong>Agent Name:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 15%"> <span><strong>Date time:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 10%"> <span><strong>Changed By:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 45%"> <span><strong>Skill:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 10%"> <span><strong>From Level:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 10%"> <span><strong>To Level:</strong></span>
+      </div>
+      <div class="p-1 alignRight" style="width: 5%"> <span><strong>Action:</strong></span>
+      </div>
+
+    </div>
+
+    <!--div *ngFor="let agent of agentsList" -->
+      <div  *ngFor="let skill of summaryListSkills; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even, gridRow: true }">
+          <div class="d-flex flex-row" [ngClass]="{deleted: skill.reportStatus === 'deleted',
+          changed: skill.reportStatus === 'changed',
+          added: skill.reportStatus === 'added'}" *ngIf="skill.reportStatus != 'kept'">
+            <div class="p-1 alignRight" style="width: 10%"> <span>{{skill.agentName}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 15%"> <span>{{skill.changedDate}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 10%"> <span>{{skill.changedBy}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 45%"> <span>{{skill.code}} -  {{skill.description}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 10%"> <span>{{skill?.fromLevel}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 10%"> <span>{{skill?.toLevel}}</span>
+            </div>
+            <div class="p-1 alignRight" style="width: 5%">
+              {{skill.reportStatus}}
+              <!--i *ngIf="skill.reportStatus === 'changed'" class="fa fa-adjust" aria-hidden="true" title="Changed"></i>
+              <i  *ngIf="skill.reportStatus === 'added'"  class="fa fa-plus-circle" aria-hidden="true" title="Added"></i>
+              <i  *ngIf="skill.reportStatus === 'kept'" class="fa fa-square" aria-hidden="true" title="Kept"></i>
+              <i  *ngIf="skill.reportStatus === 'deleted'"  class="fa fa-minus-circle" aria-hidden="true"></i -->
+            </div>
+          </div>
+      <!--/div -->
+
+
+    </div>
+
+
+
+  </div>
+  <div *ngIf="whatToShow === 'details'" class="agentInfo">
+    <div  *ngFor="let agent of agentsList; let odd=odd; let even=even" [ngClass]="{ odd: odd, even: even, gridRow: true }">
+      <app-change-logs-details [agent]="agent"></app-change-logs-details>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div id="searchMain" style="font-size: 14px">
+    <!--div class="d-flex flex-row">
+      <div class="p-1 alignRight matchTP" style="width: 10%;">
+        <label for="dataSource"><strong>Datasource:</strong></label>
+      </div>
+      <div class="p-1 matchTP">
+        <select id="dataSource" class="dataSource" #dS [(ngModel)]="dataSource" disabled>
+          <option *ngFor="let dataSource of dataSources" value="{{dataSource.id}}">{{dataSource.description}}</option>
+        </select>
+      </div>
+    </div-->
+    <div class="d-flex flex-row align-items-center align-content-stretch">
+      <div class="p-1 alignRight" style="width: 10%">
+        <label for="fromDate"><strong>Changed from:</strong></label>
+      </div>
+      <div style="width: 12%">
+        <input id="fromDate" placeholder="yyyy-mm-dd" class="matchTP"
+               name="fromDate" [(ngModel)]="dateChangedFrom" ngbDatepicker #d="ngbDatepicker" style="width:70%;">
+        <button class="fa fa-calendar matchTP" (click)="d.toggle()" type="button"> </button>
+      </div>
+      <div>
+        <ngb-timepicker [(ngModel)]="timeFrom" [meridian]="true"></ngb-timepicker>
+      </div>
+      <div class="p-1 alignRight" style="width: 10%">
+        <label for="toDate"><strong>Changed to:</strong></label>
+      </div>
+      <div style="width: 10%">
+        <input id="toDate" placeholder="yyyy-mm-dd" class="matchTP"
+               name="toDate" [(ngModel)]="dateChangedTo" ngbDatepicker #dTo="ngbDatepicker" style="width:70%;">
+        <button class="fa fa-calendar matchTP" (click)="dTo.toggle()" type="button"> </button>
+      </div>
+      <div>
+        <ngb-timepicker [(ngModel)]="timeTo" [meridian]="true" ></ngb-timepicker>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-end" >
+      <div class="p-1 alignRight" style="width: 10%; margin-bottom: 0">
+        <label for="changedBy" class="col-form-label alignRight align-bottom"><strong>Changed By:</strong></label>
+      </div>
+      <div>
+        <textarea id="changedBy" rows="2" cols="35" [(ngModel)]="changeByIdsToSearch" (keyup)="interceptEnter($event)"></textarea>
+      </div>
+      <div class="p-1 alignRight" style="width: 9%">
+        <label for="agentIds" class="col-form-label alignRight"><strong>Agent Ids:</strong></label>
+      </div>
+      <div>
+        <textarea  id="agentIds"  rows="2" cols="35" [(ngModel)]="agentsIdsToSearch" (keyup)="interceptEnter($event)"></textarea>
+      </div>
+      <div class="p-1 alignRight" style="width: 9%">
+        <label for="skills" class="col-form-label alignRight"><strong>Skills:</strong></label>
+      </div>
+      <div>
+        <textarea  id="skills"  rows="2" cols="35" [(ngModel)]="skillsToSearch" (keyup)="interceptEnter($event)"></textarea>
+      </div>
+    </div>
+  <div class="d-flex flex-row">
+    <div class="p-1">
+      <button class="btn btn-sm btn-primary" (click)="runReports()">Run Report</button>
+    </div>
+    <div class="p-1">
+      <button class="btn btn-sm btn-primary" (click)="doCancelReports()">Cancel</button>
+    </div>
+  </div>
+
+  <hr>
+  <div *ngIf="searchPerformed" id="searchResult">
+      <app-change-logs-reports [agentsList]="agentsChangeLogList" *ngIf="agentsChangeLogList.length > 0"
+                               [skillFilterToPass]="skillFilterToPass"
+      (exportToExcell)="onPrintToExcel($event)"></app-change-logs-reports>
+    <div>
+      <span  *ngIf="agentsChangeLogList.length === 0"><cite>No results found for your search criteria!</cite></span>
+    </div>
+  </div>
+
+</div>

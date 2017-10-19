@@ -1,0 +1,32 @@
+@import '~bootstrap/dist/css/bootstrap.min';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~font-awesome/css/font-awesome.css';
+
+// -------------------------
+// Primary colors
+// -------------------------
+
+$black: #000000 !default;
+$dark-green: #1a5336 !default;
+$gray: #cccccc !default;
+$green: #00A221 !default;
+$bright-green: #12ff00 !default;
+$pale-green: #f3f7ef !default;
+$dark-gray: #707070 !default;
+$light-gray: #dadada !default;
+$red: #ad0101 !default;
+$white: #ffffff !default;
+$yellow: #ffef99 !default;
+
+// -------------------------
+//  Colors for different divs like searc, searc-result, ..etc
+// -------------------------
+$backgroundSearchResult: $green;
+$baseBackground: rgba(62, 255, 93, 0.16);
+$menuBackground: #ccd1d1;
+$evenRow: #e5e7e9;
+$oddRow: #ccd1d1;
+$addedSkill: blue;
+$changedSkill: darkgreen;
+$deletedSkill: red;

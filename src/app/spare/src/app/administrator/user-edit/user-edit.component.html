@@ -1,0 +1,81 @@
+<div id="main">
+  <form #userForm="ngForm">
+  <div *ngIf="user.isNew">
+    <div class="row" style="text-align: left">
+      <div class="col-md-12">
+        <label for="cmsLoginId"><strong>AD Login ID:</strong></label>
+        <input id="cmsLoginId" [(ngModel)]="user.adLoginId" required #adLoginId="ngModel" name="adLoginId">
+        <div *ngIf="adLoginId.invalid && (adLoginId.dirty || adLoginId.touched)"
+             class="alert alert-danger">
+          <div *ngIf="adLoginId?.errors.required">
+            Active Directory Login ID is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="d-flex flex-row" style="height: 20px !important;">
+    <div class="p-2">
+      <label for="userFirstName"><strong>First Name:</strong></label>
+      <input id="userFirstName" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required [disabled]="!userInfoLoaded">
+      <div [hidden]="firstName?.valid || firstName?.pristine"
+           class="alert alert-danger" style="position:relative; z-index: 100 !important; opacity: 1 !important;">
+        First name is required
+      </div>
+    </div>
+    <div class="p-2">
+      <label for="userLastName"><strong>Last Name:</strong></label>
+      <input id="userLastName" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required [disabled]="!userInfoLoaded">
+      <div [hidden]="lastName?.valid || lastName?.pristine"
+           class="alert alert-danger" style="position:relative; z-index: 100; opacity: 1">
+        Last name is required
+      </div>
+    </div>
+    <div class="p-2">
+      <input [(ngModel)]="user.isAdministrator" name="isAdministrator" type="checkbox" #isAdmin (click)="assingAllSkills(user, isAdmin)"
+             [disabled]="!userInfoLoaded"/><strong>Administrator</strong>
+    </div>
+    <div class="p-2">
+      <input [(ngModel)]="user.hasAccessToReports" name="hasAccessToReports" type="checkbox" [disabled]="!userInfoLoaded"/><strong>Access to
+      reports</strong>
+    </div>
+    <div class="p-2">
+      <input [(ngModel)]="user.isActive" name="isActive" type="checkbox"
+             [disabled]="user.isNew || !userInfoLoaded"/><strong>Active</strong>
+    </div>
+    <div class="p-2" style="padding-left: 30px !important">
+      <button (click)="toggleSelection()" [disabled]="!userInfoLoaded">{{toggleMsg}}</button>
+    </div>
+  </div>
+  <hr style="align-self: center">
+  <div class="skillList">
+    <div class="row skillList" *ngFor="let row of gridItems">
+      <div [ngClass]="'col-md-' + 12 / gridCols" *ngFor="let skill of row">
+        <div *ngIf="skill.code">
+          <input [(ngModel)]="skill.isSelected" type="checkbox" [disabled]="user.isAdministrator"
+                 [ngModelOptions]="{standalone: true}"/>
+          {{skill?.code}} -
+          {{skill?.description}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr style="align-self: center">
+  <div class="row" style="height: 20px !important;">
+    <div class="col-md-6" style="text-align: right">
+      <button  type="submit"  class="btn btn-sm btn-primary" (click)="doUserSave()" [disabled]="!userInfoLoaded || !userForm.form.valid">
+        <span *ngIf="!user.isNew">Update User Profile</span>
+        <span *ngIf="user.isNew">Save New User</span>
+      </button>
+    </div>
+    <div class="col-md-6" style="text-align: left">
+      <button type="cancel" class="btn btn-sm btn-default" (click)="doCancellation()" [disabled]="!userInfoLoaded">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+
+  </form>
+</div>

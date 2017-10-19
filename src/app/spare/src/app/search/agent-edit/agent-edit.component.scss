@@ -1,0 +1,24 @@
+#main {
+  border: 2px solid black;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+  margn-right: 5%;
+}
+
+.nonEditSkill {
+  color: orangered;
+}
+button {
+  cursor: pointer;
+  cursor: hand;
+}
+button:disabled,
+button[disabled]{
+ cursor: not-allowed;
+}

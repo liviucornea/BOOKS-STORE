@@ -1,0 +1,11 @@
+// @include media-breakpoint-up(xs)
+@include media-breakpoint-only(xs) {
+  .mt-xs {
+    &--1 {
+      margin-top: 10px;
+    }
+    &--2 {
+      margin-top: 20px;
+    }
+  }
+}

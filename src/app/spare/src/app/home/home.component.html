@@ -1,0 +1,5 @@
+<h1>Home page!</h1>
+
+<h2 *ngIf="authenticationService.authenticated()">You are authenticated</h2>
+<h2 *ngIf="!authenticationService.authenticated()">You aren't authenticated! You can use the application like a GUEST!</h2>
+<h4>Content under development ...</h4>
