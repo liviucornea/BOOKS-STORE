@@ -1,2 +1,0 @@
-test spring MVC rest
-
