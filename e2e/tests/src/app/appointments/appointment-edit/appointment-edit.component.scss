@@ -1,0 +1,85 @@
+@import '../../../styles/app';
+
+#editMain {
+  background-color:  $baseBackground;
+  border: 1px black solid;
+  padding-top: 10px;
+}
+.columnLeft {
+  border-right: 1px black solid;
+}
+// boostrap overwrite
+.form-group{
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+}
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#editMain .container-fluid .row {
+ // padding: 2px;
+}
+
+i {
+  color: darkblue;
+}
+.active-link {
+  color: black !important;
+  background-color: darkblue !important;
+}
+.activeBtn {
+  background-color: #0275d8 !important;
+}
+
+ul li {
+  background-color: lightblue;
+}
+
+button , i, a{
+  cursor: pointer; cursor: hand;
+}
+button.btn-danger{
+  background-color: $ScotiaRed !important;
+}
+.alignRight {
+  float: right;
+}
+.alignLeft {
+  float: left;
+}
+.zoneA, .zoneB {
+  border: 1px solid black;
+}
+.primaryManager , .baseSalary {
+  border: 1px solid black;
+}
+.nbrGender{
+  width: 50%;
+}
+
+.titleText{
+  color:darkblue;
+}
+.zoneTitle{
+  border-bottom: 1px solid black;
+  background-color: $menuBackground;
+}
+.even { background: $evenRow;
+  padding: 5px;
+  color: black}
+.odd { background: $oddRow;
+  padding: 5px;
+  color: black}
+
+textarea{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.form-control {
+  font-size: 14px;
+}

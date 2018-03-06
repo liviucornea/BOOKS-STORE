@@ -1,0 +1,908 @@
+<div id="editMain">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <div class="col-2">
+        <div class="alignLeft">
+          <span  class="titleText"><strong>{{'appointment.Appointment' | translate}}</strong> </span>
+          <span *ngIf="!isAddingNew" class="titleText"><strong>{{appointment?.VPAppointmentFormID}}</strong></span>
+          <span *ngIf="isAddingNew" style="color:darkred"><strong>New</strong></span>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group row">
+          <label for="jobTitle" class="col-4 col-form-label" style="text-align: right">
+            {{'appointment.JobTitle' | translate}}
+          </label>
+          <div class="col-8" style="padding-left: 0;">
+            <input class="form-control" type="text" [(ngModel)]="appointment.JobTitle" id="jobTitle"
+                   [disabled]="readOnly">
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group row">
+          <label for="City" class="col-4 col-form-label" style="text-align: right">{{'appointment.City' | translate}}</label>
+          <div class="col-8" style="padding-left: 0;">
+            <input class="form-control" type="text" [(ngModel)]="appointment.City" id="City" [disabled]="readOnly">
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group row">
+          <label for="jobIs" class="col-4 col-form-label" style="text-align: right">{{'appointment.JobIs' | translate}}</label>
+          <div class="col-8" style="padding-left: 0;">
+            <select class="form-control" id="jobIs" #jobIs [(ngModel)]="appointment.JobIs" [disabled]="readOnly">
+              <optgroup>
+                <option *ngFor="let item of jobIsOptions" value="{{item.description}}">{{item.description}}</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+      </div>
+      <div class="col-3">
+        <div class="form-group row">
+          <label for="jobLevel" class="col-4 col-form-label" style="text-align: right">{{'appointment.JobLevel' | translate}}</label>
+          <div class="col-8" style="padding-left: 0;">
+            <select id="jobLevel" #jobLevel class="form-control" [(ngModel)]="appointment.JobLevel"
+                    [disabled]="readOnly">
+              <optgroup>
+                <option *ngFor="let jobLevel of jobLevels" value="{{jobLevel.description}}">{{jobLevel.description}}</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group row">
+          <label for="Country" class="col-4 col-form-label" style="text-align: right">{{'appointment.Country' | translate}}</label>
+          <div class="col-8" style="padding-left: 0;">
+            <input class="form-control" type="text" [(ngModel)]="appointment.Country" id="Country"
+                   [disabled]="readOnly">
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group row">
+          <label for="generalComments" class="col-4 col-form-label" style="text-align: right">{{'appointment.GeneralComments' |
+            translate}}</label>
+          <div class="col-8" style="padding-left: 0;">
+            <textarea id="generalComments" class="form-control" [disabled]="readOnly"
+                      [(ngModel)]="appointment.GeneralComments" rows="2" cols="60"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-5">
+        <div class="form-group row">
+          <label for="a1BusinessLine" class="col-7 col-form-label"
+          style="text-align: right !important;">{{'appointment.BusinessLine' | translate}}</label>
+          <div class="col-5" style="padding-left: 0;">
+            <select class="form-control" id="a1BusinessLine" [disabled]="readOnly"
+                    [(ngModel)]="appointment.BusinessLineID">
+              <optgroup>
+                <option *ngFor="let line of businessLines" value="{{line.BusinessLineID}}">{{line.Name}}</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="form-group row">
+          <label for="ReportingToNewManagerName" class="col-5 col-form-label" style="text-align: right">{{'appointment.ReportingToNewManagerName'
+            | translate}}</label>
+          <div class="col-6" style="padding-left: 0;">
+            <input class="form-control" type="text" [(ngModel)]="appointment.ReportingToNewManagerName"
+                   style="float: left"
+                   id="ReportingToNewManagerName" [disabled]="readOnly">
+          </div>
+        </div>
+      </div>
+      <div class="col-2" style="padding-top: 1% !important;">
+        <button style="float: right" class="btn btn-sm btn-danger"
+                [disabled]="readOnly" (click)="callToSave()">Save</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- Approval to post:  -->
+  <div class="zoneA">
+    <div class="zoneTitle">
+      <span class="titleText"><strong>{{'appointment.approvalToPostTitle' | translate}}</strong></span>
+      <i *ngIf="expandZoneA" class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"
+         (click)="toggleExpandZoneA(expandZoneA)"></i>
+      <i *ngIf="!expandZoneA" class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"
+         (click)="toggleExpandZoneA(expandZoneA)"></i>
+    </div>
+    <div *ngIf="expandZoneA" class="container-fluid">
+      <div class="row even">
+        <div class="col-6 columnLeft"> <!-- left column -->
+          <div class="form-group row even">
+            <label for="transitNbr" class="col-6 col-form-label">{{'appointment.TransitNumber' | translate}}</label>
+            <div class="col-6">
+              <input class="form-control" type="text" style="width: 80%;"
+                     id="transitNbr"
+                     [(ngModel)]="appointment.TransitNumber" [disabled]="readOnly">
+            </div>
+          </div>
+          <div class="form-group row odd">
+            <label for="nbrOfDirectReportsTo" class="col-6 col-form-label">{{'appointment.NumOfDirectReports' | translate}}</label>
+            <div class="col-6">
+              <input class="form-control" type="text" style="width: 80%;" [(ngModel)]="appointment.NumOfDirectReports"
+                     id="nbrOfDirectReportsTo"
+                     [disabled]="readOnly">
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12 primaryManager">
+              <div><span><strong>REPORTING TO:</strong></span></div>
+              <div><span>Primary Manager (as will appear on HR Passport)</span></div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="row odd">
+                    <label for="ReportingToNewManagerName2" class="col-6 col-form-label">
+                      {{'appointment.ReportingToNewManagerName' | translate}} </label>
+                    <div class="col-6">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="ReportingToNewManagerName2"
+                             [(ngModel)]="appointment.ReportingToNewManagerName">
+                    </div>
+                  </div>
+                  <div class="row even">
+                    <div class="col-6">
+                      <label class="col-form-label" for="ReportingToNewMangerTitle">
+                        {{'appointment.ReportingToNewMangerTitle' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="ReportingToNewMangerTitle"
+                             [(ngModel)]="appointment.ReportingToNewMangerTitle">
+                    </div>
+                  </div>
+                  <div class="row odd">
+                    <div class="col-6">
+                      <label for="ReportingToBusinessLine" class="col-form-label">{{'appointment.ReportingToBusinessLine' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <select id="ReportingToBusinessLine" class="form-control"
+                              [disabled]="readOnly" style="width: 80%;"
+                              [(ngModel)]="appointment.ReportingToBusinessLine">
+                        <optgroup>
+                          <option *ngFor="let line of businessLines" value="{{line.BusinessLineID}}">{{line.Name}}
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row even">
+                    <div class="col-6">
+                      <label class="col-form-label" for="ReportingToDivision">{{'appointment.ReportingToDivision' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="ReportingToDivision"
+                             [(ngModel)]="appointment.ReportingToDivision">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row odd"> <!-- Secondary Manager -->
+            <div class="col-12">
+              <div><span>Secondary Manager (if dual reporting)</span></div>
+              <div class="row even">
+                <div class="col-12">
+                  <div class="row even">
+                    <div class="col">
+                      <label class="col-form-label" for="SecondaryToNewManagerName">{{'appointment.SecondaryToNewManagerName' | translate}}</label>
+                    </div>
+                    <div class="col">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="SecondaryToNewManagerName"
+                             [(ngModel)]="appointment.SecondaryToNewManagerName">
+                    </div>
+                  </div>
+                  <div class="row odd">
+                    <div class="col">
+                      <label class="col-form-label" for="SecondaryToNewMangerTitle">
+                        {{'appointment.SecondaryToNewMangerTitle' | translate}}</label>
+                    </div>
+                    <div class="col">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="SecondaryToNewMangerTitle"
+                             [(ngModel)]="appointment.SecondaryToNewMangerTitle">
+                    </div>
+                  </div>
+                  <div class="row even">
+                    <div class="col-6">
+                      <label class="col-form-label" for="SecondaryToBusinessLine">
+                        {{'appointment.SecondaryToBusinessLine' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <select id="SecondaryToBusinessLine" [disabled]="readOnly"
+                              class="form-control" style="width: 80%;"
+                              [(ngModel)]="appointment.SecondaryToBusinessLine">
+                        <optgroup>
+                          <option *ngFor="let line of businessLines" value="{{line.BusinessLineID}}">{{line.Name}}
+                          </option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row odd">
+                    <div class="col-6">
+                      <label class="col-form-label" for="SecondaryToDivision">
+                        {{'appointment.SecondaryToDivision' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                             id="SecondaryToDivision"
+                             [(ngModel)]="appointment.SecondaryToDivision">
+                    </div>
+                  </div>
+                  <div class="row even">
+                    <div class="col-6">
+                      <label class="col-form-label" for="DirectOrIndirectReporting">{{'appointment.DirectOrIndirectReporting' | translate}}</label>
+                    </div>
+                    <div class="col-6">
+                      <select id="DirectOrIndirectReporting" [disabled]="readOnly"
+                              class="form-control" style="width: 50%;"
+                              [(ngModel)]="appointment.DirectOrIndirectReporting">
+                        <optgroup>
+                          <option  value="Direct">Direct</option>
+                          <option  value="Indirect">Indirect</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6"> <!-- right column zonaA-->
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="NameCurrentIncumbent">
+                {{'appointment.NameCurrentIncumbent' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                     id="NameCurrentIncumbent"
+                     [(ngModel)]="appointment.NameCurrentIncumbent">
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="HCCApproval">
+                {{'appointment.HCCApproval' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <!-- input type="date" name="HCCApproval" id="HCCApproval"
+                     date-format="mm-dd-yyyy" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"
+                     max="2099-12-31"
+                     [disabled]="readOnly"
+                     class="form-control" style="width:60%;" [(ngModel)]="appointment.HCCApproval" -->
+              <input type="text" style="width:40%;" id="HCCApproval"
+                     [disabled]="readOnly"
+                     class="form-control"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker [(ngModel)]="appointment.HCCApproval"
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label">{{'appointment.ImpactToVPPComplement' | translate}}</label>
+            </div>
+            <div class="col-6" id="ImpactToVPPComplement">
+              <input type="radio" value="Increase" name="ImpactToVPPComplement" [disabled]="readOnly"
+                     id="Increase" aria-labelledby="ImpactToVPPComplement"
+                     [(ngModel)]="appointment.ImpactToVPPComplement"><label for="Increase" style="padding-left: 5px;">Increase</label>
+              <input type="radio" value="Neutral" name="ImpactToVPPComplement" [disabled]="readOnly"
+                     id="Neutral" aria-labelledby="ImpactToVPPComplement"
+                     [(ngModel)]="appointment.ImpactToVPPComplement"><label for="Neutral" style="padding-left: 5px;">Neutral</label>
+              <input type="radio" value="Decrease" name="ImpactToVPPComplement" [disabled]="readOnly"
+                     id="Decrease" aria-labelledby="ImpactToVPPComplement"
+                     [(ngModel)]="appointment.ImpactToVPPComplement"><label for="Decrease" style="padding-left: 5px;">Decrease</label>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="Comments">{{'appointment.Comments' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <textarea class="form-control" [disabled]="readOnly"
+                        id="Comments"
+                        [(ngModel)]="appointment.Comments" rows="2" cols="40"></textarea>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="HasJobBeenEvaluated">{{'appointment.HasJobBeenEvaluated' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="HasJobBeenEvaluated" #HasJobBeenEvaluated
+                      style="width:30%;"
+                      [(ngModel)]="appointment.HasJobBeenEvaluated" [disabled]="readOnly">
+                <optgroup>
+                  <option  value="true">YES</option>
+                  <option  value="false">NO</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="ApprovalDate">{{'appointment.ApprovalDate' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <!--input type="date" name="ApprovalDate" id="ApprovalDate"
+                     date-format="mm-dd-yyyy" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"
+                     max="2099-12-31"
+                     [disabled]="readOnly"
+                     class="form-control" style="width:60%;" [(ngModel)]="appointment.ApprovalDate" -->
+              <input type="text" style="width:40%;" id="ApprovalDate"
+                     [disabled]="readOnly"
+                     class="form-control"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker [(ngModel)]="appointment.ApprovalDate"
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="TrueOpportunity">{{'appointment.TrueOpportunity' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="TrueOpportunity" #TrueOpportunity
+                      style="width:30%;"
+                      [(ngModel)]="appointment.TrueOpportunity" [disabled]="readOnly">
+                <optgroup>
+                  <option  value="true">YES</option>
+                  <option  value="false">NO</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="ReplacementReason">{{'appointment.ReplacementReason' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="ReplacementReason" #ReplacementReason style="width:80%;"
+                      [(ngModel)]="appointment.ReplacementReason" [disabled]="readOnly">
+                <optgroup>
+                  <option *ngFor="let item of replacementReasons" value="{{item.description}}">{{item.description}}
+                  </option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="ReorganizationDetail">{{'appointment.ReorganizationDetail' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                     id="ReorganizationDetail"
+                     [(ngModel)]="appointment.ReorganizationDetail">
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="ConfirmJobPosted">
+                {{'appointment.ConfirmJobPosted' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="ConfirmJobPosted" #ConfirmJobPosted
+                      style="width:30%;"
+                      [(ngModel)]="appointment.ConfirmJobPosted" [disabled]="readOnly">
+                <optgroup>
+                  <option  value="true">YES</option>
+                  <option  value="false">NO</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="ReasonForNotPosting">{{'appointment.ReasonForNotPosting' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control" type="text" style="width: 80%;" [disabled]="readOnly"
+                     id="ReasonForNotPosting"
+                     [(ngModel)]="appointment.ReasonForNotPosting">
+            </div>
+          </div>
+          <div class="row even" *ngIf="appointment.ApproversZoneA">
+            <div class="col-12">
+              <app-approvers [approvals]="appointment.ApproversZoneA" [zone]="'A'"
+                             [relationToForm]="appointment.relationToForm">
+                [appointment]="appointment"
+              </app-approvers>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <!-- Candidate recommendation -->
+  <div class="zoneB" *ngIf="zoneBisVisible">
+    <div class="zoneTitle">
+      <span class="titleText"><strong>{{'appointment.CandidateRecommendationTitle' | translate}}</strong></span>
+      <i *ngIf="expandZoneB" class="fa fa-arrow-circle-up fa-lg" aria-hidden="true" (click)="toggleExpandZoneB()"></i>
+      <i *ngIf="!expandZoneB" class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"
+         (click)="toggleExpandZoneB()"></i>
+    </div>
+    <div *ngIf="expandZoneB" class="container-fluid">
+      <div class="row odd">
+        <div class="col-6 columnLeft"><!-- left column --->
+          <div class="row odd">
+            <div class="col-12">
+              <label class="col-form-label">If the job was posted please complete the section below:</label>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12">
+              <span style="float:left"><strong>Applicants:</strong></span>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-4">
+              <label class="col-form-label"># Internal applicants:</label>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label"
+                       for="NumberOfInternalApplicantsFemale">
+                  {{'appointment.NumberOfInternalApplicantsFemale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfInternalApplicantsFemale"
+                         id="NumberOfInternalApplicantsFemale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfInternalApplicantsFemale" maxlength="3">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfInternalApplicantsMale">
+                  {{'appointment.NumberOfInternalApplicantsMale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfInternalApplicantsMale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfInternalApplicantsMale" maxlength="3">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-4">
+              <label class="col-form-label"># Internal interviewed:</label>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfInternalInterviewsFemale">
+                  {{'appointment.NumberOfInternalInterviewsFemale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfInternalInterviewsFemale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfInternalInterviewsFemale" maxlength="3">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfInternalInterviewsMale">
+                  {{'appointment.NumberOfInternalInterviewsMale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfInternalInterviewsMale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfInternalInterviewsMale" maxlength="3">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-4">
+              <label class="col-form-label"># External applicants:</label>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfExternalApplicantsFemale">
+                  {{'appointment.NumberOfExternalApplicantsFemale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfExternalApplicantsFemale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfExternalApplicantsFemale" maxlength="3">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfExternalApplicantsMale">
+                  {{'appointment.NumberOfExternalApplicantsMale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfExternalApplicantsMale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfExternalApplicantsMale" maxlength="3">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-4">
+              <label class="col-form-label"># External interviewed:</label>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfExternalInterviewsFemale">
+                  {{'appointment.NumberOfExternalInterviewsFemale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfExternalInterviewsFemale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfExternalInterviewsFemale" maxlength="3">
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group row">
+                <label class="col-4 col-form-label" for="NumberOfExternalInterviewsMale">
+                  {{'appointment.NumberOfExternalInterviewsMale' | translate}}
+                </label>
+                <div class="col-8">
+                  <input class="nbrGender form-control" id="NumberOfExternalInterviewsMale"
+                         (keyup)='numbersOnly($event)' [disabled]="readOnly"
+                         [(ngModel)]="appointment.NumberOfExternalInterviewsMale" maxlength="3">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-4">
+              <label class="col-form-label" for="CriticalJobRequirements">{{'appointment.CriticalJobRequirements' | translate}}</label>
+            </div>
+            <div class="col-8">
+              <textarea class="form-control" [disabled]="readOnly" id="CriticalJobRequirements"
+                        [(ngModel)]="appointment.CriticalJobRequirements" rows="4"
+                        cols="49"></textarea>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12">
+              <label class="col-form-label" for="InterviewMethodAndInterviewers">
+                {{'appointment.InterviewMethodAndInterviewers' | translate}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <textarea class="form-control" [disabled]="readOnly" id="InterviewMethodAndInterviewers"
+                        [(ngModel)]="appointment.InterviewMethodAndInterviewers" rows="4"
+                        cols="80"></textarea>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-12">
+              <label class="col-form-label" for="TopCandidate1">
+                Top 3 candidates (Name, Title, Business line / Function, Talent flag,
+                Gender, Reason for not selecting):</label>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12">
+              <textarea class="form-control" [disabled]="readOnly" id="TopCandidate1"
+                        [(ngModel)]="appointment.TopCandidate1" rows="3" cols="80"></textarea>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-12">
+              <textarea class="form-control" [disabled]="readOnly" title="Top 2 candidate"
+                        [(ngModel)]="appointment.TopCandidate2" rows="3" cols="80"></textarea>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12">
+              <textarea class="form-control" [disabled]="readOnly" title="Top 3 candidate"
+                        [(ngModel)]="appointment.TopCandidate3" rows="3" cols="80"></textarea>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-12">
+              <label class="col-form-label" for="IfNoFemaleCandidatesExplain">
+                {{'appointment.IfNoFemaleCandidatesExplain' | translate}}</label>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12">
+              <textarea class="form-control" [disabled]="readOnly" id="IfNoFemaleCandidatesExplain"
+                        [(ngModel)]="appointment.IfNoFemaleCandidatesExplain" rows="2"
+                        cols="80"></textarea>
+            </div>
+          </div>
+
+        </div> <!-- end of left column-->
+        <div class="col-6"><!-- right column starts here--->
+          <div class="row odd">
+            <div class="col-2">
+              <label class="col-form-label" for="CandidateFirstName">{{'appointment.CandidateFirstName' | translate}}</label>
+            </div>
+            <div class="col-4">
+              <input class="form-control" [disabled]="readOnly"
+                    id="CandidateFirstName" [(ngModel)]="appointment.CandidateFirstName">
+            </div>
+            <div class="col-2">
+              <label class="col-form-label" for="CandidateLastName">{{'appointment.CandidateLastName' | translate}}</label>
+            </div>
+            <div class="col-4">
+              <input class="form-control" id="CandidateLastName" [disabled]="readOnly" [(ngModel)]="appointment.CandidateLastName">
+            </div>
+
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="candidateGender">{{'appointment.CandidateGender' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <div style="float:left">
+
+                <select id="candidateGender" #candidateGender class="form-control"
+                        [(ngModel)]="appointment.CandidateGender" [disabled]="readOnly">
+                  <optgroup>
+                    <option value="Woman">Woman</option>
+                    <option value="Man">Man</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="CandidateCurrentTitle">{{'appointment.CandidateCurrentTitle' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control" id="CandidateCurrentTitle" [disabled]="readOnly" [(ngModel)]="appointment.CandidateCurrentTitle">
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="CandidateCurrentBusinessLine">
+                {{'appointment.CandidateCurrentBusinessLine' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" style="width:80%;" id="CandidateCurrentBusinessLine" [disabled]="readOnly"
+                      [(ngModel)]="appointment.CandidateCurrentBusinessLine">
+                <optgroup>
+                  <option *ngFor="let line of businessLines" value="{{line.BusinessLineID}}">{{line.Name}}</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="CandidateCurrentManagerNameTitle">{{'appointment.CandidateCurrentManagerNameTitle' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <input class="form-control"  style="width:80%;" [disabled]="readOnly" id="CandidateCurrentManagerNameTitle"
+                     [(ngModel)]="appointment.CandidateCurrentManagerNameTitle">
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="currentCandidateLevel">{{'appointment.CandidateCurrentJobLevel' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select id="currentCandidateLevel" class="form-control" style="width:80%;" [disabled]="readOnly"
+                      [(ngModel)]="appointment.CandidateCurrentJobLevel">
+                <optgroup>
+                  <option *ngFor="let jobLevel of currentCandidateJobLevels" value="{{jobLevel.description}}">
+                    {{jobLevel.description}}
+                  </option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="candidateTFlg">{{'appointment.CandidateTalentFlag' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="candidateTFlg" #candidateTFlg style="width:80%;"
+                      [(ngModel)]="appointment.CandidateTalentFlag" [disabled]="readOnly">
+                <optgroup>
+                  <option *ngFor="let item of candidateTalentFlg" value="{{item.description}}">{{item.description}}
+                  </option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-6">
+              <label class="col-form-label" for="CandidateFirstTimeVP">1<sup>st</sup> {{'appointment.CandidateFirstTimeVP' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select class="form-control" id="CandidateFirstTimeVP" #CandidateFirstTimeVP
+                      style="width:30%;"
+                      [(ngModel)]="appointment.CandidateFirstTimeVP" [disabled]="readOnly">
+                <optgroup>
+                  <option  value="true">YES</option>
+                  <option  value="false">NO</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="row odd">
+            <div class="col-6">
+              <label class="col-form-label" for="CandidateLRPSuccessor">{{'appointment.CandidateLRPSuccessor' | translate}}</label>
+            </div>
+            <div class="col-6">
+              <select id="CandidateLRPSuccessor" class="form-control" style="width:80%;" [disabled]="readOnly"
+                      [(ngModel)]="appointment.CandidateLRPSuccessor">
+                <optgroup>
+                  <option *ngFor="let LRPItem of LRPSuccessorToJob" value="{{LRPItem.description}}">
+                    {{LRPItem.description}}
+                  </option>
+                </optgroup>
+              </select>
+
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12 baseSalary">
+              <div><label class="col-form-label"><strong>Base salary recommendation:</strong></label></div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="BaseSalaryIncreaseAmount">{{'appointment.BaseSalaryIncreaseAmount' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" maxlength="12" [disabled]="readOnly" id="BaseSalaryIncreaseAmount"
+                         [(ngModel)]="appointment.BaseSalaryIncreaseAmount">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="BaseSalaryIncreasePercent">{{'appointment.BaseSalaryIncreasePercent' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" [disabled]="readOnly" id="BaseSalaryIncreasePercent"
+                         [(ngModel)]="appointment.BaseSalaryIncreasePercent" style="width:20%;" maxlength="3">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="BaseSalaryNewSalary">{{'appointment.BaseSalaryNewSalary' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <input class="form-control" [disabled]="readOnly" id="BaseSalaryNewSalary"
+                         [(ngModel)]="appointment.BaseSalaryNewSalary" maxlength="12">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="BaseSalaryApprovalDate">{{'appointment.BaseSalaryApprovalDate' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <!-- input class="form-control" type="date" style="width:60%;" [disabled]="readOnly"
+                         max="2099-12-31" date-format="mm-dd-yyyy" id="BaseSalaryApprovalDate"
+                         [(ngModel)]="appointment.BaseSalaryApprovalDate" -->
+                  <input type="text" style="width:40%;" id="BaseSalaryApprovalDate"
+                         [disabled]="readOnly"
+                         class="form-control"
+                         [minDate]="minDate"
+                         [maxDate]="maxDate"
+                         #dp="bsDatepicker"
+                         bsDatepicker [(ngModel)]="appointment.BaseSalaryApprovalDate"
+                         [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="BaseSalarySalaryTermSheetAttached">{{'appointment.BaseSalarySalaryTermSheetAttached' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" id="BaseSalarySalaryTermSheetAttached" #BaseSalarySalaryTermSheetAttached
+                          style="width:30%;"
+                          [(ngModel)]="appointment.BaseSalarySalaryTermSheetAttached" [disabled]="readOnly">
+                    <optgroup>
+                      <option  value="true">YES</option>
+                      <option  value="false">NO</option>
+                    </optgroup>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 baseSalary">
+              <div><label class="col-form-control"><strong>Announcement / Effective date information:</strong></label>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="AnnouncementDate">{{'appointment.AnnouncementDate' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <!-- input type="date" name="AnnouncementDate" max="2099-12-31" date-format="mm-dd-yyyy"
+                         class="form-control" [disabled]="readOnly" style="width:60%;"
+                         id="AnnouncementDate"
+                         [(ngModel)]="appointment.AnnouncementDate" -->
+                  <input type="text" style="width:40%;" id="AnnouncementDate"
+                         [disabled]="readOnly"
+                         class="form-control"
+                         [minDate]="minDate"
+                         [maxDate]="maxDate"
+                         #dp="bsDatepicker"
+                         bsDatepicker [(ngModel)]="appointment.AnnouncementDate"
+                         [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="col-form-label" for="AnnouncementEffectiveDate">{{'appointment.AnnouncementEffectiveDate' | translate}}</label>
+                </div>
+                <div class="col-6">
+                  <!-- input type="date" name="AnnouncementEffectiveDate" max="2099-12-31" date-format="mm-dd-yyyy"
+                         class="form-control" [disabled]="readOnly" style="width:60%;"
+                         id="AnnouncementEffectiveDate"
+                         [(ngModel)]="appointment.AnnouncementEffectiveDate" -->
+                  <input type="text" style="width:40%;" id="AnnouncementEffectiveDate"
+                         [disabled]="readOnly"
+                         class="form-control"
+                         [minDate]="minDate"
+                         [maxDate]="maxDate"
+                         #dp="bsDatepicker"
+                         bsDatepicker [(ngModel)]="appointment.AnnouncementEffectiveDate"
+                         [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row even">
+            <div class="col-12" *ngIf="appointment.ApproversZoneB">
+              <app-approvers [approvals]="appointment.ApproversZoneB" [zone]="'B'"
+                             [relationToForm]="appointment.relationToForm">
+                [appointment]="appointment"
+              </app-approvers>
+            </div>
+          </div>
+        </div> <!-- end of right column -->
+      </div> <!-- end of row -->
+    </div> <!-- end of expanded zoneB -->
+  </div><!-- end of zoneB -->
+
+  <div id="fileAttachments" *ngIf="appointment.VPAppointmentFormID!==0 && zoneBisVisible">
+    <app-file-attachments [appointment]="appointment" [attachmentsList]="appointment.Files"></app-file-attachments>
+  </div>
+  <!-- Buttons --->
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <button class="btn btn-sm btn-danger"
+              [disabled]="readOnly" (click)="callToSave()">Save</button>
+    </div>
+    <div class="p-2">
+      <button class="btn btn-sm btn-danger"
+              [disabled]="readOnly" (click)="callToCancel()">Cancel</button>
+    </div>
+  </div>
+</div>

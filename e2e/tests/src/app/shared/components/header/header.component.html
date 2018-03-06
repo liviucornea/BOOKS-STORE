@@ -1,0 +1,28 @@
+<nav class="navbar navbar-toggleable-md navbar-light mainMenu">
+  <button class="navbar-toggler navbar-toggler-right btn-sm" type="button" data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="optionTracker">
+        <a class="nav-link" routerLink="/appointments" routerLinkActive="active-link">
+          {{'menuTracker' | translate}}</a>
+      </li>
+      <li class="nav-item" *ngIf="!optionNavigateForNew">
+        <a class="nav-link">Approve Form</a>
+      </li>
+      <li class="nav-item" *ngIf="optionNavigateForNew">
+        <a class="nav-link"
+           (click)="navigateTo(0)"
+           routerLink="edit-appointment/"
+           routerLinkActive="active-link">{{'menuCreateForm' | translate}}</a>
+      </li>
+      <li class="nav-item" *ngIf="optionGrantAccess">
+        <a class="nav-link menuItem" routerLink="/home" routerLinkActive="active-link">{{'menuGrantAccess' | translate}}</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>

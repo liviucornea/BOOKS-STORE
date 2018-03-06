@@ -1,0 +1,28 @@
+@import '../../../../styles/app';
+
+#typeahead-list {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+ // border-left: 1px solid;
+ // border-bottom: 1px solid;
+ // border-right: 1px solid;
+  margin-left: 1px;
+  margin-right: 1px;
+  max-height: 400px;
+  width: 400px !important;
+  z-index: 200;
+  overflow: auto;
+
+  .list-group-item {
+
+    &:first-child {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

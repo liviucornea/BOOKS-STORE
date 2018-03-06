@@ -1,0 +1,13 @@
+<div style="width:100%;"><input type="text" #theInput title="email"
+                                class="form-control"
+                                [(ngModel)]="itemDescription" style="width: 99%; !important;"
+            placeholder="email address or name...." type="text" autocomplete="off"
+                                (focusout)="focusOut(theInput.value)">
+  <div *ngIf="listCmp.length > 0">
+    <ul id="typeahead-list" class="list-group" >
+      <li class="list-group-item" *ngFor="let item of listCmp">
+        <a (click)="selectItem(item)" #theItem (mouseover)="setFocus(theItem)" >{{item.text}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

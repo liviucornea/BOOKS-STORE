@@ -1,0 +1,270 @@
+<div id="appointmentsListUI">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="mr-auto p-2" *ngIf="appointments.length===1"><h5>Appointment is below:</h5></div>
+      <div class="mr-auto p-2" *ngIf="appointments.length>1">
+        <h5>List of appointments below ({{appointments.length}} items):</h5></div>
+      <div class="p-2">
+        <button *ngIf="hasItemsForDeletion" (click)="callExport()"
+                type="button" class="btn btn-danger btn-sm">Export
+        </button>
+      </div>
+      <div class="p-2">
+        <button *ngIf="hasItemsForDeletion" (click)="callDeletion()"
+                type="button" class="btn btn-danger btn-sm">Delete
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid"><!-- header zone --->
+    <div class="row zoneTitle">
+      <div class="toDelete">
+         <span><strong>Select</strong></span>
+        <div style="text-align: center">
+          <input type="checkbox" #playAll title="select/deselect"
+                    (click)="selectUnselectAll(playAll)">
+        </div>
+      </div>
+      <div class="app-Id">
+        <span><strong>{{'appointment.Id' | translate}}</strong></span>
+      </div>
+      <div class="createDate">
+        <span><strong>{{'appointment.CreateDate' | translate}}</strong></span>
+        <i class="fa fa-sort" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="!(appointmentsListOrderBy=='CreateDateDESC' || appointmentsListOrderBy=='CreateDateASC')"
+           (click)="sortAppointmentsListby('CreateDateASC')"></i>
+        <i class="fa fa-sort-asc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='CreateDateASC'" (click)="sortAppointmentsListby('CreateDateASC')"></i>
+        <i class="fa fa-sort-desc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='CreateDateDESC'" (click)="sortAppointmentsListby('CreateDateDESC')"></i>
+      </div>
+      <div class="apptStatus">
+        <span><strong>{{'appointment.AppointmentStatus' | translate}}</strong></span>
+        <i class="fa fa-sort" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="!(appointmentsListOrderBy=='AppointmentStatusDESC' || appointmentsListOrderBy=='AppointmentStatusASC')"
+           (click)="sortAppointmentsListby('AppointmentStatusASC')"></i>
+        <i class="fa fa-sort-asc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='AppointmentStatusASC'"
+           (click)="sortAppointmentsListby('AppointmentStatusASC')"></i>
+        <i class="fa fa-sort-desc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='AppointmentStatusDESC'"
+           (click)="sortAppointmentsListby('AppointmentStatusDESC')"></i>
+      </div>
+      <div class="jobTitle">
+        <span><strong>{{'appointment.JobTitle' | translate}}</strong></span>
+        <i class="fa fa-sort" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="!(appointmentsListOrderBy=='JobTitleDESC' || appointmentsListOrderBy=='JobTitleASC')"
+           (click)="sortAppointmentsListby('JobTitleASC')"></i>
+        <i class="fa fa-sort-asc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='JobTitleASC'" (click)="sortAppointmentsListby('JobTitleASC')"></i>
+        <i class="fa fa-sort-desc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='JobTitleDESC'" (click)="sortAppointmentsListby('JobTitleDESC')"></i>
+      </div>
+      <div class="candidateName">
+        <span><strong>Candidate Name</strong></span>
+        <i class="fa fa-sort" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="!(appointmentsListOrderBy=='CandidateNameDESC' || appointmentsListOrderBy=='CandidateNameASC')"
+           (click)="sortAppointmentsListby('CandidateNameASC')"></i>
+        <i class="fa fa-sort-asc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='CandidateNameASC'" (click)="sortAppointmentsListby('CandidateNameASC')"></i>
+        <i class="fa fa-sort-desc" style="margin-right: 10px" aria-hidden="true"
+           *ngIf="appointmentsListOrderBy=='CandidateNameDESC'" (click)="sortAppointmentsListby('CandidateNameDESC')"></i>
+
+      </div>
+      <div class="appApproval">
+        <div>
+          <span class="centerBlock"><strong>{{ 'appointmentList.JobPostingApprovals' | translate}}</strong></span>
+        </div>
+      </div>
+      <div class="candidateApproval">
+        <div>
+          <span class="centerBlock"><strong>{{ 'appointmentList.CandidateApprovals' | translate}}</strong></span>
+        </div>
+      </div>
+      <div class="creator">
+        <span><strong>Creator</strong></span>
+      </div>
+      <div class="info">
+        <!-- empty  --->
+      </div>
+    </div>
+  </div> <!-- end of header zone -->
+  <div class="container-fluid"> <!-- rows zone -->
+    <div class="row" *ngFor="let appointment of appointments; let odd=odd; let even=even"
+         [ngClass]="{ odd: odd, even: even}">
+      <div class="toDelete">
+        <div class="firstColumn">
+          <label class="custom-control custom-checkbox">
+            <input class="custom-control-input" [(ngModel)]="appointment.toBeDeleted" type="checkbox" #toDelete
+                   title="select/deselect"
+                   (click)="detectDeletion(toDelete, appointment)">
+            <span class="custom-control-indicator"></span>
+          </label>
+        </div>
+      </div>
+      <div class="app-Id">
+        <span class='link'
+              (click)="navigateTo(appointment.VPAppointmentFormID)">{{appointment?.VPAppointmentFormID}}</span>
+      </div>
+      <div class="createDate">
+        <span>{{appointment?.CreateDate}}</span>
+      </div>
+      <div class="apptStatus">
+        <select id="AppointmentStatus_{{appointment?.VPAppointmentFormID}}" #AppointmentStatus class="form-control"
+                name="AppointmentStatus" title="status"
+                [(ngModel)]="appointment.AppointmentStatus" (change)="statusChange(appointment)">
+          <optgroup>
+            <option *ngFor="let status of appointmentStatuses" value="{{status.description}}">{{status.description}}
+            </option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="jobTitle" style="word-wrap: break-word; !important;">
+        <a [routerLink]="['/edit-appointment',appointment.VPAppointmentFormID]">
+          <span style="color: darkblue; !important;">{{appointment?.JobTitle}}</span></a>
+      </div>
+      <div class="candidateName">
+        <label *ngIf="appointment?.CandidateFirstName">{{appointment?.CandidateFirstName + ' '}}</label>
+        <label *ngIf="appointment?.CandidateLastName"> {{appointment?.CandidateLastName }} </label>
+      </div>
+      <div class="appApproval">
+        <div class="row">
+          <div class="col-2">
+            <i *ngIf="appointment.expandAppApprovals" class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"
+               (click)="toggleExpansion(appointment, 'A')"></i>
+            <i *ngIf="!appointment.expandAppApprovals" class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"
+               title="Click to see dates."
+               (click)="toggleExpansion(appointment, 'A')"></i>
+          </div>
+          <div class="col-10"  style="padding-left: 1px;"><strong>VP/SVP HR Business Partner</strong></div>
+        </div>
+        <div *ngIf="appointment.expandAppApprovals">
+          <div class="row topBottPad">
+            <div class="col-12">
+              <input type="text" name="apApproveVPSvpHrDte"
+                     class="form-control" style="width:70%;"
+                     title="VP SVP HR date"
+                     [(ngModel)]="appointment.apApproveVPSvpHrDte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row topBottPad">
+            <div class="col-12" style="padding-right: 2px;"><strong>SCT</strong></div>
+           </div>
+          <div class="row topBottPad">
+            <div class="col-12">
+              <input type="text" name="apApproveSCTDte"
+                     class="form-control" style="width:70%;"
+                     title="SCT date"
+                     [(ngModel)]="appointment.apApproveSCTDte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row topBottPad">
+            <div class="col-12"><strong>Leadership</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <input type="text" name="apApproveLeadershipDte"
+                     class="form-control" style="width:70%;"
+                     title="Leadership date"
+                     [(ngModel)]="appointment.apApproveLeadershipDte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="padding-right: 2px;"><strong>CEO/CHRO</strong></div>
+          </div>
+          <div class="row topBottPad">
+            <div class="col-12">
+              <input type="text" name="apApproveCEODte"
+                     class="form-control" style="width:70%;"
+                     title="CEO date"
+                     [(ngModel)]="appointment.apApproveCEODte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="candidateApproval">
+        <div class="row">
+          <div class="col-2">
+            <i *ngIf="appointment.expandCandidateApproval" class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"
+               (click)="toggleExpansion(appointment, 'C')"></i>
+            <i *ngIf="!appointment.expandCandidateApproval" class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"
+               title="Click to see dates."
+               (click)="toggleExpansion(appointment, 'C')"></i>
+          </div>
+          <div class="col-10" style="padding-left: 1px;"><strong>VP/SVP HR Business Partner</strong></div>
+        </div>
+        <div *ngIf="appointment.expandCandidateApproval">
+          <div class="row topBottPad">
+            <div class="col-12">
+              <input type="text" name="apCandidateHrRmDte"
+                     class="form-control" style="width:70%;"
+                     title="HR RM date"
+                     [(ngModel)]="appointment.apCandidateHrRmDte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12"><strong>Leadership</strong></div>
+          </div>
+          <div class="row topBottPad">
+            <div class="col-12">
+              <input type="text" name="apCandidateLeadershipDte"
+                     class="form-control" style="width:70%;"
+                     title="Leadership date"
+                     [(ngModel)]="appointment.apCandidateLeadershipDte"
+                     (ngModelChange)="statusChange(appointment)"
+                     [minDate]="minDate"
+                     [maxDate]="maxDate"
+                     #dp="bsDatepicker"
+                     bsDatepicker
+                     [bsConfig]="{ dateInputFormat: 'MM-DD-YYYY' , containerClass: 'theme-red'}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="creator">
+        {{appointment.creatorName}}
+      </div>
+      <div class="info">
+        <i *ngIf="appointment.GeneralComments" title="{{appointment.GeneralComments}}" class="fa fa-info-circle"
+           aria-hidden="true"></i>
+        <button style="margin-left: 3px;" *ngIf="!appointment.toBeDeleted && appointment.isChanged"
+                (click)="callToSave(appointment)"
+                type="button" class="btn btn-danger btn-sm">Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

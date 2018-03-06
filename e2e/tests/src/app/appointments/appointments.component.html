@@ -1,0 +1,8 @@
+<div id="main">
+ <!!-- here you will have a search component in future --->
+  <div>
+    <app-appointments-list *ngIf="appointmentsList?.length>0" [appointments]="appointmentsList"
+                           (exportToExcell)="onPrintToExcel($event)"
+    ></app-appointments-list>
+  </div>
+</div>

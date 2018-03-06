@@ -1,0 +1,15 @@
+#modal-dialog {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Bootstrap Override */
+.modal-header,
+.modal-body,
+.modal-body div table tbody tr td,
+.modal-footer  {
+  border: none;
+}
+button {
+  cursor: pointer; cursor: hand;
+}

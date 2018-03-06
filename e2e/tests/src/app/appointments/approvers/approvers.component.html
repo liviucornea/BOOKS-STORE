@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-6"><span><strong>Approvals:</strong></span></div>
+  <div class="col-6">
+    <i class="fa fa-plus-square fa-lg alignRight" style="float:right;" aria-hidden="true"
+       *ngIf="relationToForm !='APPROVAL'"
+       (click)="addNewApproval()" title="Add new approval"></i>
+  </div>
+</div>
+<div class="row" *ngFor="let approval of approvals; let odd=odd; let even=even" [ngClass]="{ even: odd, odd: even, gridRow: true }">
+  <div class="col-12" *ngIf="relationToForm==='APPROVAL'&& approval?.isVisible && approval.PositionIdentifier!=='CEO/CHRO'">
+    <div><span>Please use Approve OR Return. Optionally add a reason in text box.</span></div>
+  </div>
+  <div class="col-4" *ngIf="approval?.isVisible && approval.PositionIdentifier!=='CEO/CHRO'">
+    <select id="approvalPosition_{{approval?.ApprovalID}}" #approvalPosition class="form-control"
+            title="approval"
+          [disabled]="relationToForm==='APPROVAL'"  [(ngModel)]="approval.PositionIdentifier">
+      <optgroup>
+        <option *ngFor="let position of approvalPositions" value="{{position.description}}">{{position.description}}</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="col-6" style="display: block"
+       *ngIf="relationToForm !='APPROVAL' && approval.PositionIdentifier!=='CEO/CHRO'">
+    <div class="row">
+      <div class="col-12">
+        <input class="form-control" type="text" style="width: 80%; float:left"
+               placeholder="email address or name...."
+               [(ngModel)]="approval.Email"
+               #term (keyup)="search(term.value, approval)">
+      </div>
+    </div>
+    <div class="row" *ngIf="approval.approvalsList && approval.approvalsList.length > 0">
+      <div class="col-12">
+        <ul id="typeahead-list" class="list-group" >
+          <li class="list-group-item" *ngFor="let user of approval.approvalsList; let odd=odd; let even=even"
+              [ngClass]="{ odd: odd, even: even}">
+            <a (click)="selectUser(user, approval)" #theItem>
+              {{user.FirstName + ' ' + user.LastName + ': ' + user.EMail}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-1" *ngIf="relationToForm !='APPROVAL' && approval.PositionIdentifier!=='CEO/CHRO'">
+    <button class="btn btn-sm btn-danger" (click)="callToSendToApproval(approval)">Send</button>
+  </div>
+  <div class="col-1" *ngIf="relationToForm !='APPROVAL' && approval.PositionIdentifier!=='CEO/CHRO'">
+    <i style="float: right;" class="fa fa-minus-circle" aria-hidden="true" (click)="deleteApproval(approval)" title="Delete approval"></i>
+  </div>
+  <div class="col-4" *ngIf="relationToForm==='APPROVAL' && approval?.isVisible && approval.PositionIdentifier!=='CEO/CHRO'">
+    <!--input type="date" name="HCCApproval" max="2099-12-31" date-format="mm-dd-yyyy"
+           class="form-control" [(ngModel)]="approval.ApprovedDate"-->
+    <input type="text" name="approverEmail" disabled title="email"
+           class="form-control" [(ngModel)]="approval.Email">
+  </div>
+  <div class="col-2" *ngIf="relationToForm==='APPROVAL' && approval?.isVisible && approval.PositionIdentifier!=='CEO/CHRO'">
+    <button class="btn btn-sm btn-danger" (click)="doApprove(approval)">Approve</button>
+  </div>
+  <div class="col-2" *ngIf="relationToForm==='APPROVAL'&& approval?.isVisible && approval.PositionIdentifier!=='CEO/CHRO'">
+    <button class="btn btn-sm btn-danger" (click)="doReturn(approval)">Return</button>
+  </div>
+  <div class="col-12" *ngIf="approval.intendToReturn"><label for="CommentForReturn_{{approval.ApprovalID}}" style="vertical-align: top">Comments:</label>
+    <textarea class="form-control" id="CommentForReturn_{{approval.ApprovalID}}"
+              placeholder="Optional: Enter a reason for returning form to RM. Click Return."
+              [(ngModel)]="approval.CommentForReturn" rows="2" cols="20"></textarea>
+  </div>
+</div>

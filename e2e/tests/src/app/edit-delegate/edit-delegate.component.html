@@ -1,0 +1,36 @@
+<div id="mainEditD">
+  <div class="container-fluid">
+    <div class="form-group row">
+      <div class="col-3" style="text-align: left">
+        <div *ngIf="selectedUserInfo">
+          <span>User selected: <strong>{{selectedUserInfo}}</strong></span>
+        </div>
+      </div>
+      <div class="col-5" style="text-align: right">
+        <label>Search  by first name, last name or email</label>
+      </div>
+      <div class="col-4">
+        <input class="form-control" type="text" style="width: 80%; float:left"
+               placeholder="Enter the text you want to search for..."
+               [(ngModel)]="searchedEmail"
+               #term (keyup)="search(term.value)">
+      </div>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let user of users" >
+        <span class='link' (click)="select(user)">
+          {{user.FirstName}} - {{user.LastName}} &nbsp;&nbsp; {{user.EMail}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="row"  style="width: 98%; margin: auto;">
+      <div class="col-12">
+        <button class="btn btn-sm btn-danger"
+                [disabled]="toUserID===0"
+                (click)="callToAddDelegate()">Add Delegate</button>
+      </div>
+    </div>
+  </div>
+
+</div>

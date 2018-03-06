@@ -1,0 +1,25 @@
+@import '../../../../styles/app';
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.nav-link {
+  color: white !important;
+}
+.active-link {
+  color: $ScotiaRed !important;
+  background-color: white !important;
+ // border-radius: 10px;
+
+}
+.navbar-collapse {
+  background-color: $ScotiaRed ;
+  padding-left: 20px;
+//  font-size: medium;
+//  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  cursor: hand;
+}

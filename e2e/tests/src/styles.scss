@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/app';
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+$secondary: #00A221;
+$spinner-background: rgba(255, 255, 255, 1);
+$spinner-global-background: darkgrey;
+$spinner-color: #1e1ddb;
+$spinner-wedge-color: $secondary;
+
+
+.form-control {
+  font-size: 14px;
+}
+optgroup { font-size:8px;
+  color: black;
+}

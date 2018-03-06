@@ -1,0 +1,24 @@
+<div class="border border-primary" style="width: 98%; margin: auto">
+  <div>
+    <span>Here you can add or remove a delegate for your profile.</span>
+  </div>
+  <hr>
+  <div class="container-fluid">
+    <div class="row"
+         style="width: 98%; margin: auto;"
+         *ngFor="let delegate of delegates; let odd=odd; let even=even" [ngClass]="{ even: odd, odd: even }">
+      <!-- div class="col-1">{{delegate.AccessDelegationID}}</div -->
+      <div class="col-2">{{delegate.ToUserFirstName}}</div>
+      <div class="col-2">{{delegate.ToUserLastName}}</div>
+      <div class="col-2">{{delegate.ToUserEmail}}</div>
+      <div class="col-2">
+        <i style="float: right;" class="fa fa-minus-circle" aria-hidden="true" (click)="callToDeleteDelegate(delegate)"
+           title="Delete delegate"></i>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" style="width: 98%; margin: auto;">
+        <app-edit-delegate (exportNewDelegate)="getNewDelegate($event)"
+        [existingDelegates]="delegates"></app-edit-delegate>
+  </div>
+</div>

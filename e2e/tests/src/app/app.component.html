@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="top">
+    <div class="row" id="firstLine" style="padding-bottom: 1px !important;">
+      <div class="col-sm-3">
+        <img id="logoImg" src="{{ logoPath }}" routerLink="/" alt="ScotiaBank Logo">
+      </div>
+      <div class="col-sm-4 v-align">
+        <h4 class="v-align">
+          <strong>{{'welcomeTitle' | translate}}</strong>
+        </h4>
+      </div>
+      <div class="col-sm-5 toRight">
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+        {{authenticationService.currentUser.FirstName}}&nbsp;{{authenticationService.currentUser.LastName}}
+      </div>
+      <!--div class="col-sm-2 toRight">
+        <select class="form-control" #selLanguage [(ngModel)]="selectedLanguage.code" name="lang"
+                (change)="changeLanguage(selLanguage.value)">
+          <option *ngFor="let language of languages" value={{language.code}}>
+            {{language.description}}
+          </option>
+        </select>
+      </div-->
+    </div>
+    <div class="row" style="margin-top: 1px !important;">
+      <div class="col-sm-12">
+        <app-header></app-header>
+      </div>
+    </div>
+</div>
+<div class="main">
+  <!-- Alert container -->
+  <app-notification></app-notification>
+  <!-- Spinner container -->
+  <app-spinner></app-spinner>
+  <!-- Router place container -->
+  <router-outlet></router-outlet>
+</div>

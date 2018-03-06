@@ -1,0 +1,48 @@
+<div>
+    <div class="row">
+      <div class="col-7">  <span><strong>Attachments:</strong>
+        <i *ngIf="expanded" class="fa fa-arrow-circle-up fa-lg" aria-hidden="true"
+           (click)="toggleExpand()"></i>
+        <i *ngIf="!expanded" class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"
+           (click)="toggleExpand()"></i></span>
+      </div>
+      <div class="col-5" style="padding-right: 10px;">
+      <span style="float: left;"><i class="fa fa-plus-square fa-lg" aria-hidden="true"
+                                    *ngIf="allowDelete"
+                 (click)="toggleUpload()" title="Upload new file"></i>
+      </span>
+      </div>
+    </div>
+
+  <div class="container-fluid" *ngIf="expanded">
+    <div class="row" *ngFor="let fileAttached of attachmentsList; let odd=odd; let even=even"
+         [ngClass]="{ even: odd, odd: even, gridRow: true }">
+      <!-- div class="col-lg-2 col-sm-2">
+        <span class='link' (click)="downloadFile(fileAttached.FileID, fileAttached.FileName)">{{fileAttached.FileID}}</span>
+      </div -->
+      <div class="col-lg-6 col-sm-6">
+        <span class='link' (click)="downloadFile(fileAttached.FileID, fileAttached.FileName)">{{fileAttached.FileName}}</span>
+      </div>
+      <div class="col-1 col-sm-1">
+        <!-- i *ngIf="fileAttached.type==='excel'" class="fa fa-file-excel-o" aria-hidden="true"></i>
+        <i *ngIf="fileAttached.type==='word'" class="fa fa-file-word-o" aria-hidden="true"></i>
+        <i *ngIf="fileAttached.type==='pdf'" class="fa fa-file-pdf-o" aria-hidden="true"></i -->
+        <i (click)="downloadFile(fileAttached.FileID, fileAttached.FileName)"
+           style="cursor: pointer;" title="Download the file"
+           class="fa fa-file-text" aria-hidden="true"></i>
+      </div>
+      <div class="col-1 col-sm-1">
+      <i style="float: right;" class="fa fa-minus-circle" aria-hidden="true"
+         *ngIf="allowDelete"
+         (click)="callToDeleteFile(fileAttached)" title="Delete file"></i>
+      </div>
+
+    </div>
+  </div>
+    <div class="uploadNew" *ngIf="uploadNew">
+      <em>You can upload a new file here:</em>
+      <input type="file" (change)="fileChange($event)" placeholder="Upload file"
+             accept=".doc, .docx, .pdf, .xls, .xlsx, .csv, .txt, .msg, .png, .jpg, .jpeg, .htm, .html, .mht">
+    </div>
+
+</div>

@@ -1,0 +1,106 @@
+@import '../../../styles/app';
+#appointmentsListUI {
+  background-color: $baseBackground;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.zoneTitle {
+  background-color: $menuBackground;
+}
+input[type=checkbox] {
+  transform: scale(1.2);
+}
+
+.gridHeader, .gridRow {
+  margin-left: 2px;
+}
+
+.topList{
+  border-bottom: 1px solid darkgrey;
+}
+
+i {
+  font-style: italic;
+  color: darkblue;
+}
+
+.app-Id{
+ margin-left: 2px;
+  width: 2%;
+}
+.createDate {
+  margin-left: 3px;
+  width: 9%;
+}
+.toDelete {
+  width: 4%;
+}
+
+.jobTitle {
+  margin-left: 5px;
+  width: 8%;
+}
+.candidateName {
+  margin-left: 2px;
+  width: 12%;
+}
+
+.apptStatus{
+  margin-left: 5px;
+  width: 15%;
+}
+.appApproval {
+  margin-left: 2px;
+  width: 15%;
+}
+
+.candidateApproval {
+  margin-left: 2px;
+  width: 17%;
+}
+
+.creator {
+  margin-left: 5px;
+  width: 11%;
+}
+.firstColumn{
+  margin-left: 25% ;
+}
+.info {
+  display: inline;
+  width: 4%;
+}
+.topBottPad{
+  padding-top:2px;
+  padding-bottom: 2px;
+}
+span.link {
+  color: darkblue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.even { background: $evenRow;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: black}
+.odd { background: $oddRow;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: black}
+button, i {
+  cursor: pointer;
+  cursor: hand;
+}
+button.btn-danger{
+  background-color: $ScotiaRed !important;
+}
+.centerBlock {
+  display: table;
+  margin: auto;
+}
+.dropDown {
+  width:95% !important;
+}
+
